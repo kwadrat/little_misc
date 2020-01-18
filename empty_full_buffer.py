@@ -29,7 +29,7 @@ class Buffer(object):
         Buffer:
         '''
         result = self.first_ready - self.first_free - 1
-        if not self.crossing_end():
+        if result < 0:
             result += self.total
         return result
 
@@ -38,7 +38,7 @@ class Buffer(object):
         Buffer:
         '''
         result = self.first_free - self.first_ready
-        if self.crossing_end():
+        if result < 0:
             result += self.total
         return result
 
