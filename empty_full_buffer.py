@@ -47,7 +47,7 @@ class Buffer(object):
         b = self.free_space()
         c = a + b
         if c != self.total - 1:
-            raise RuntimeError("Elements + Free should be Buffer Size decreased by 1: a = %d b = %d c = %d" % (a, b, c))
+            raise RuntimeError("Elements + Free should be equal to Buffer Size decreased by 1: a = %d b = %d c = %d" % (a, b, c))
 
 
 class TestSpaceAndElements(unittest.TestCase):
