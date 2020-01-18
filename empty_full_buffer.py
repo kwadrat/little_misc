@@ -18,12 +18,6 @@ class Buffer(object):
         Buffer:
         '''
 
-    def crossing_end(self):
-        '''
-        Buffer:
-        '''
-        return self.first_free < self.first_ready
-
     def free_space(self):
         '''
         Buffer:
