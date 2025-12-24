@@ -208,6 +208,8 @@ class GreenBarn:
         GreenBarn:
         '''
         self.gfx_file_name = gfx_file_name
+        if self.verbose:
+            print('Opening: %s' % self.gfx_file_name)
         im_a = self.read_image_file(self.gfx_file_name)
         if self.verbose:
             self.shape_before = im_a.size
