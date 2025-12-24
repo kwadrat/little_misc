@@ -294,8 +294,10 @@ class TestGaps(unittest.TestCase):
 
 def recognize_rd_options():
     parser = argparse.ArgumentParser()
+    # Gather all file names specified without dash
     parser.add_argument(
-        '--src_file',
+        'src_file_ls',
+        nargs='*',
         default=None,
         help='Source image filename',
         )
@@ -323,20 +325,23 @@ def recognize_rd_options():
 
 
 def do_my_main():
-    error_occured = 1
+    error_occured = 0
     parser, opt_bag = recognize_rd_options()
-    gfx_file_name = opt_bag.src_file
     if opt_bag.run_tests:
         unittest.main(argv=sys.argv[:1])
-    green_barn = GreenBarn()
-    if gfx_file_name is not None:
-        error_occured = green_barn.fn_main(
-            gfx_file_name,
-            opt_bag.skip_col,
-            opt_bag.skip_row,
-            opt_bag.verbose,
-        )
+    elif opt_bag.src_file_ls:
+        for gfx_file_name in opt_bag.src_file_ls:
+            green_barn = GreenBarn()
+            error_occured = green_barn.fn_main(
+                gfx_file_name,
+                opt_bag.skip_col,
+                opt_bag.skip_row,
+                opt_bag.verbose,
+            )
+            if error_occured:
+                break
     else:
+        error_occured = 1
         parser.print_help()
     return error_occured
 
